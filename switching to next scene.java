@@ -9,50 +9,58 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class first extends Application { // inherits from Application
-	Stage window;
-	Scene scene1, scene2;
-	
-	public static void main(String[] args) { // main method
-		
-		launch(args); // this will call below start method
-	}
-	
-	
-	public void start(Stage primaryStage) throws Exception{ // this is main brain of javafx program
-		window = primaryStage;
-		window.setTitle("This is title");
-		Label label = new Label("this is the label of scene 1");
-		Button btn1 = new Button("Go to Scene2");
-		btn1.setOnAction(e->
-		{
-			window.setScene(scene2); // going to scene 2
-		}
-		//layout1				
-				);
-		VBox layout = new VBox(20);
-		layout.getChildren().addAll(label, btn1);
-		scene1 = new Scene(layout, 300, 200);
-		/**
-		 * FINISHING OF 1ST SCENE
-		 * NO in Second Scene
-		 * 
-		 * 
-		 */
+public class switching to next scene extends Application { // inherits from Application
+Stage window;
+Scene scene1, scene2;
 
-		Button btn2 = new Button("This sucks, Goback in Scene1");
-		btn2.setOnAction( e-> window.setScene(scene1)); // going to scene  bck to 1
-		// layout
-		StackPane layout2 = new StackPane();
-		layout2.getChildren().add(btn2);
-		// making scene2
-		scene2 = new Scene(layout2, 400, 500); // adding things inside the scene
-		
-		// Now Importantly Setuping default 
-		window.setScene(scene1);
-		window.show();
-		
-		
+public static void main(String[] args) {
+	launch(args);
+   }
+public void start(Stage primaryStage) throws Exception{
+window = primaryStage;
+
+window.setTitle("This is main title");
+Label lb1 = new Label("");
+lb1.setText("Welcome, to scene 1. If You want to go in scene 2 then click below button");
+Button btn1 = new Button();
+btn1.setText("Go to Scene2");
+/**
+ * For event handleing we are using labda expressions or Event Handeler
+ * 
+ */
+btn1.setOnAction(new EventHandler<ActionEvent>() {
+	public void handle(ActionEvent event) {
+		window.setScene(scene2);
 	}
+}
+		);
+	// now using VBox layout for confortable responsive window or stage and scne
+VBox layout1 = new VBox(30); // VBox layout uses the parameter for making Space
+layout1.getChildren().addAll(btn1, lb1);
+/**
+ * SETUP OF SCENE
+ */
+scene1 = new Scene(layout1, 500,500); // main 
+/**
+ * For next scene
+ */
+Button btn2 = new Button();
+btn2.setText("Go Bact - Scene1");
+btn2.setOnAction(new EventHandler<ActionEvent>() {
+	public void handle(ActionEvent event) {
+		window.setScene(scene1);
+	}
+});
+StackPane layout2 = new StackPane();
+layout2.getChildren().add(btn2);
+/**
+ * SETUPO SCENE2
+ */
+scene2 = new Scene(layout2, 500, 500);
+// Making default and showing all
+window.setScene(scene1); // this act as a default
+window.show(); // for showing window or Stage
+
+}
 
 }
